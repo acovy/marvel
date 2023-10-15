@@ -16,14 +16,14 @@ class CharInfo extends Component {
         error: false
     }
 
-    marvelService = new MarvelService();
+    marvelService = new MarvelService(); // хук функция для обращения к апи , 
 
     componentDidMount() {
         this.updateChar();
     }
-
+// пропс - струк данных которая передается от родителя к дочернему эл для чтения и отрисовки не меняется (не мутируется)
     componentDidUpdate(prevProps){
-        if (this.props.charId !== prevProps.charId) {
+        if (this.props.charId !== prevProps.charId) { // 
             this.updateChar();
         }
     }
@@ -116,6 +116,8 @@ const View = ({char}) => {
                         // eslint-disable-next-line
                         if (i > 9) return;
                         return (
+                            // key - уник ключ который присвается для конк эл , нужен reacty для понимания какой комикс был добавлен удален и изменен
+                            // для правильного рендеринга
                             <li key={i} className="char__comics-item">
                                 {item.name}
                             </li>

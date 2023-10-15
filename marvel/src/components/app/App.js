@@ -6,32 +6,38 @@ import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 import decoration from '../../resources/img/vision.png';
-
+// все что внутри него до метода рендер умещает в себе логику и вычисления 
 class App extends Component {
-    
+    // инициализация состояния компонента , меняется , для хранения данных
     state = {
         selectedChar: null
     }
 
+    // обработчик событий который меняет состояние функцию сет стейт по событию
     onCharSelected = (id) => {
         this.setState({
-            selectedChar: id
+            selectedChar: id // прокидываем специальный айди и меняем состояние (берется из charList)
         })
     }
 
-    render() {
+    render() { 
+        // тут джсикс который возвращает разметку с логикой
+        // отображаться на странице будет все что в скобках ретерна 
         return (
             <div className="app">
-                <AppHeader/>
+                {/* шапка страницы */}
+                <AppHeader/> 
                 <main>
                     <ErrorBoundary>
-                        <RandomChar/>
+                        <RandomChar/> {/* шапка страницы */}
                     </ErrorBoundary>
                     <div className="char__content">
-                        <ErrorBoundary>
+                        <ErrorBoundary> 
+                            {/* получаем айди */}
                             <CharList onCharSelected={this.onCharSelected}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
+                            {/* прокидыаем айди */}
                             <CharInfo charId={this.state.selectedChar}/>
                         </ErrorBoundary>
                     </div>

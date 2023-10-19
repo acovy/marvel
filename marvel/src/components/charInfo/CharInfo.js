@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 import Skeleton from '../skeleton/skeleton';
@@ -11,40 +11,26 @@ import './charInfo.scss';
 const CharInfo = (props) => {
 
     const [char, setChar] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
 
-    const marvelService = new MarvelService(); // хук функция для обращения к апи , 
+    const {loading, error, getCharacter, clearError} = useMarvelService();
 
     useEffect(() => {
-        updateChar();
+        updateChar()
     }, [props.charId])
-// пропс - струк данных которая передается от родителя к дочернему эл для чтения и отрисовки не меняется (не мутируется)
 
     const updateChar = () => {
         const {charId} = props;
         if (!charId) {
             return;
         }
-        onCharLoading();
-        marvelService
-            .getCharacter(charId)
+
+        clearError();
+        getCharacter(charId)
             .then(onCharLoaded)
-            .catch(onError);
     }
 
     const onCharLoaded = (char) => {
-        setLoading(false);
         setChar(char);
-    }
-
-    const onCharLoading = () => {
-        setLoading(true);
-    }
-
-    const onError = () => {
-        setLoading(false);
-        setError(true);
     }
 
     const skeleton = char || loading || error ? null : <Skeleton/>;
@@ -97,8 +83,6 @@ const View = ({char}) => {
                         // eslint-disable-next-line
                         if (i > 9) return;
                         return (
-                            // key - уник ключ который присвается для конк эл , нужен reacty для понимания какой комикс был добавлен удален и изменен
-                            // для правильного рендеринга
                             <li key={i} className="char__comics-item">
                                 {item.name}
                             </li>

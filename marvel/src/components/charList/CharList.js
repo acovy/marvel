@@ -9,9 +9,9 @@ import './charList.scss';
 const CharList = (props) => {
 
     const [charList, setCharlist] = useState([]);
-    const [newItemLoading, setNewItemLoading] = useState(false);
+    const [newItemLoading, setNewItemLoading] = useState(false); 
     const [offset, setOffset] = useState(1541);
-    const [charEnded, setCharEnded] = useState(false);
+    const [charEnded, setCharEnded] = useState(false); 
     
     const {loading, error, getAllCharacters} = useMarvelService();
 
@@ -31,7 +31,7 @@ const CharList = (props) => {
             ended = true;
         }
 
-        setCharlist(charList => [...charList, ...newCharList]);
+        setCharlist(charList => [...charList, ...newCharList]); // раскладываем массив чтобы вернуть те же самые массивы что есть в нем
         setNewItemLoading(newItemLoading => false);
         setOffset(offset => offset + 9);
         setCharEnded(charEnded => ended);

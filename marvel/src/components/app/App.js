@@ -4,6 +4,7 @@ import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+import ComicsList from "../comicsList/ComicsList";
 
 import decoration from '../../resources/img/vision.png';
 // все что внутри него до метода рендер умещает в себе логику и вычисления 
@@ -22,20 +23,19 @@ const App = () => {
                 {/* шапка страницы */}
                 <AppHeader/> 
                 <main>
-                    <ErrorBoundary>
-                        <RandomChar/> {/* шапка страницы */}
+                    {/* <ErrorBoundary>
+                        <RandomChar/> 
                     </ErrorBoundary>
                     <div className="char__content">
                         <ErrorBoundary> 
-                            {/* получаем айди */}
                             <CharList onCharSelected={onCharSelected}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
-                            {/* прокидыаем айди */}
                             <CharInfo charId={selectedChar}/>
                         </ErrorBoundary>
                     </div>
-                    <img className="bg-decoration" src={decoration} alt="vision"/>
+                    <img className="bg-decoration" src={decoration} alt="vision"/> */}
+                    <ComicsList/>
                 </main>
             </div>
         )
